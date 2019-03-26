@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { DoughnutSettings } from './doughnut.interface';
 
 @Component({
   selector: 'spice-doughnut',
@@ -6,7 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./doughnut.component.scss']
 })
 export class DoughnutComponent implements OnInit {
+  @Input()
+  settings: DoughnutSettings;
+
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.settings);
+  }
 }

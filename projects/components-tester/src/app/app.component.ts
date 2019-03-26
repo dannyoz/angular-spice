@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DoughnutSettings } from '../../../components/src/public-api';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'components-tester';
+  doughnutSettings: DoughnutSettings = {
+    value: 100,
+    labelText: 'Awesome!',
+    size: 180,
+    thickness: 5,
+    animationDuration: 1000
+  };
 }
