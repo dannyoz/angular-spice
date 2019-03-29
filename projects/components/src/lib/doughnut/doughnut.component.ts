@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DoughnutSettings } from './doughnut.interface';
+import { DoughnutSettings, DefaultSettings, Styles, DefaultStyles } from './doughnut.interface';
 
 @Component({
   selector: 'spice-doughnut',
@@ -9,10 +9,18 @@ import { DoughnutSettings } from './doughnut.interface';
 export class DoughnutComponent implements OnInit {
   @Input()
   settings: DoughnutSettings;
+  computedSettings: DoughnutSettings;
+  styles: Styles;
 
   constructor() {}
 
+  configure() {
+    this.computedSettings = { ...DefaultSettings, ...this.settings };
+    this.styles = DefaultStyles;
+  }
+
   ngOnInit() {
-    console.log(this.settings);
+    this.configure();
+    console.log(this.computedSettings, this.styles);
   }
 }

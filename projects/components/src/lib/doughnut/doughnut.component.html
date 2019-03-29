@@ -1,3 +1,22 @@
-<p>
-  doughnut works!
-</p>
+<div
+  className="react-svg-doughnut"
+  attr.style="Object.assign({}, styles.svgStyle, {position: 'relative'})"
+>
+  <svg attr.viewBox="`0 0 ${computedSettings.size} ${computedSettings.size}`">
+    <circle
+      cx="50%"
+      cy="50%"
+      attr.r="(computedSettings.size / 2) - computedSettings.thickness"
+      attr.style="Object.assign({}, this.settings.styles.sharedStyles , this.settings.styles.circleStyle )"
+    ></circle>
+    <!-- <path
+          d={calculatePathShape(this.state.appliedPercentage, this.settings.size, this.settings.thickness)}
+          style={Object.assign({}, this.settings.styles.sharedStyles , this.settings.styles.pathStyle )}>
+      </path> -->
+  </svg>
+  <!-- <div style={Object.assign({}, this.settings.styles.textWrapperStyle )}>
+      {(this.settings.labelText && this.settings.labelPosition === 'top') && <p style={Object.assign({}, this.settings.styles.labelTextStyle)}>{this.settings.labelText}</p>}
+      <p style={Object.assign({}, this.settings.styles.percentageTextStyle)} >{`${this.state.display}`}</p>
+      {(this.settings.labelText && this.settings.labelPosition === 'bottom') && <p style={Object.assign({}, this.settings.styles.labelTextStyle)}>{this.settings.labelText}</p>}
+  </div> -->
+</div>

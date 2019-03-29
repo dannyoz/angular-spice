@@ -9,7 +9,7 @@ import { DoughnutSettings } from '../../../components/src/public-api';
 export class AppComponent {
   title = 'components-tester';
   doughnutSettings: DoughnutSettings = {
-    value: 100,
+    value: 75,
     labelText: 'Awesome!',
     size: 180,
     thickness: 5,
