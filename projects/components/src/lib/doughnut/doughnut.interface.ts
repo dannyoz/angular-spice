@@ -14,6 +14,7 @@ export interface DoughnutSettings {
   labelColour?: string;
   labelFontSize?: number;
   labelFontWeight?: string;
+  labelPosition?: string;
   percentageFontSize?: number;
   percentageFontWeight?: string;
   ceiling?: number;
@@ -69,7 +70,8 @@ export const DefaultSettings: DoughnutSettings = {
   percentageFontSize: 28,
   percentageFontWeight: 'bold',
   ceiling: 100,
-  format: Format.Percentage
+  format: Format.Percentage,
+  labelPosition: 'bottom'
 };
 
 export const DefaultStyles: Styles = {
