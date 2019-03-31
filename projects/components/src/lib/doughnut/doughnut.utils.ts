@@ -1,4 +1,6 @@
-export const CalculatePathShape = (percentage, size, thickness) => {
+import { DefaultStyles, DoughnutSettings, PathStyle } from './doughnut.interface';
+
+export const CalculatePathShape = (percentage, size, thickness): string => {
   const PI = Math.PI;
   const cos = Math.cos;
   const sin = Math.sin;
@@ -22,7 +24,7 @@ export const CalculatePathShape = (percentage, size, thickness) => {
   return String(attrString);
 };
 
-export const Format = (settings, val) => {
+export const Format = (settings, val): string => {
   const format = settings.format;
   let display;
   switch (format) {
@@ -39,12 +41,53 @@ export const Format = (settings, val) => {
   return display;
 };
 
-export const CalculatePercentage = settings => {
+export const CalculatePercentage = (settings): number => {
   const value = settings.value || 0;
   const ceiling = settings.ceiling || 100;
   return (value / ceiling) * 100;
 };
 
-export const StepDuration = (percentage, duration) => {
+export const StepDuration = (percentage, duration): number => {
   return duration / percentage;
+};
+
+export const GenerateStyles = (settings: DoughnutSettings) => {
+  const sharedStyles: PathStyle = {
+    fill: 'none',
+    strokeWidth: `${settings.thickness}px` || DefaultStyles.sharedStyles.strokeWidth
+  };
+
+  const overides = {
+    svgStyle: {
+      width: `${settings.size}px` || DefaultStyles.svgStyle.width,
+      height: `${settings.size}px` || DefaultStyles.svgStyle.height
+    },
+    circleStyle: {
+      ...sharedStyles,
+      ...{
+        stroke: settings.ringColour || DefaultStyles.circleStyle.stroke
+      }
+    },
+    pathStyle: {
+      ...sharedStyles,
+      ...{
+        stroke: settings.primaryColour || DefaultStyles.pathStyle.stroke
+      }
+    },
+    percentageTextStyle: {
+      fontFamily: settings.percentageFontFamily || DefaultStyles.percentageTextStyle.fontFamily,
+      fontWeight: settings.percentageFontWeight || DefaultStyles.percentageTextStyle.fontWeight,
+      fontSize: `${settings.percentageFontSize}px` || DefaultStyles.percentageTextStyle.fontSize,
+      color: settings.primaryColour || DefaultStyles.percentageTextStyle.color,
+      margin: '0'
+    },
+    labelTextStyle: {
+      fontFamily: settings.labelFontFamily || DefaultStyles.labelTextStyle.fontFamily,
+      fontWeight: settings.labelFontWeight || DefaultStyles.labelTextStyle.fontWeight,
+      fontSize: `${settings.labelFontSize}px` || DefaultStyles.labelTextStyle.fontSize,
+      color: settings.labelColour || DefaultStyles.labelTextStyle.color,
+      margin: '0'
+    }
+  };
+  return { ...DefaultStyles, ...overides };
 };

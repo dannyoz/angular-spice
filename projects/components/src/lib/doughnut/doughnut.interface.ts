@@ -1,4 +1,4 @@
-enum Format {
+export enum DoughnutFormat {
   Percentage = 'percentage',
   Fraction = 'fraction'
 }
@@ -14,14 +14,17 @@ export interface DoughnutSettings {
   labelColour?: string;
   labelFontSize?: number;
   labelFontWeight?: string;
+  labelFontFamily?: string;
   labelPosition?: string;
   percentageFontSize?: number;
   percentageFontWeight?: string;
+  percentageFontFamily?: string;
   ceiling?: number;
-  format?: Format;
+  format?: DoughnutFormat;
 }
 
 export interface FontStyles {
+  fontFamily?: string;
   fontWeight?: string;
   fontSize?: string;
   color?: string;
@@ -34,7 +37,6 @@ export interface SvgStyle {
 }
 
 export interface TextWrapperStyle {
-  fontFamily?: string;
   position?: string;
   left?: string;
   top?: string;
@@ -70,7 +72,7 @@ export const DefaultSettings: DoughnutSettings = {
   percentageFontSize: 28,
   percentageFontWeight: 'bold',
   ceiling: 100,
-  format: Format.Percentage,
+  format: DoughnutFormat.Percentage,
   labelPosition: 'bottom'
 };
 
@@ -90,7 +92,6 @@ export const DefaultStyles: Styles = {
     stroke: '#e7534f'
   },
   textWrapperStyle: {
-    fontFamily: 'inherit',
     position: 'absolute',
     left: '50%',
     top: '50%',
@@ -98,12 +99,14 @@ export const DefaultStyles: Styles = {
     textAlign: 'centre'
   },
   percentageTextStyle: {
+    fontFamily: 'inherit',
     fontWeight: 'bold',
     fontSize: '28px',
     color: '#e7534f',
     margin: '0'
   },
   labelTextStyle: {
+    fontFamily: 'inherit',
     fontWeight: 'normal',
     fontSize: '14px',
     color: '#e7534f',

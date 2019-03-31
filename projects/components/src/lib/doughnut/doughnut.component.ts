@@ -2,15 +2,12 @@ import { Component, OnInit, Input } from '@angular/core';
 import {
   DoughnutSettings,
   DefaultSettings,
-  Styles,
-  DefaultStyles,
   SvgStyle,
   StrokeStyle,
-  PathStyle,
   TextWrapperStyle,
   FontStyles
 } from './doughnut.interface';
-import { CalculatePathShape, Format } from './doughnut.utils';
+import { CalculatePathShape, Format, StepDuration, GenerateStyles } from './doughnut.utils';
 
 @Component({
   selector: 'spice-doughnut',
@@ -20,12 +17,11 @@ import { CalculatePathShape, Format } from './doughnut.utils';
 export class DoughnutComponent implements OnInit {
   @Input()
   settings: DoughnutSettings;
-
   computedSettings: DoughnutSettings;
-  styles: Styles;
+
   svgStyle: SvgStyle;
   circleStyle: StrokeStyle;
-  pathStyle: PathStyle;
+  pathStyle: StrokeStyle;
   textWrapperStyle: TextWrapperStyle;
   percentageTextStyle: FontStyles;
   labelTextStyle: FontStyles;
@@ -33,31 +29,47 @@ export class DoughnutComponent implements OnInit {
   viewboxAttr: string;
   dAttr: string;
   display: string;
+  appliedValue: number;
 
-  configureStyles() {
-    this.styles = DefaultStyles;
-    this.svgStyle = this.styles.svgStyle;
-    this.circleStyle = { ...this.styles.circleStyle, ...this.styles.sharedStyles };
-    this.pathStyle = { ...this.styles.pathStyle, ...this.styles.sharedStyles };
-    this.textWrapperStyle = this.styles.textWrapperStyle;
-    this.labelTextStyle = this.styles.labelTextStyle;
-    this.percentageTextStyle = this.styles.percentageTextStyle;
-  }
-
-  configure() {
+  configure(): void {
     this.computedSettings = { ...DefaultSettings, ...this.settings };
     this.viewboxAttr = `0 0 ${this.computedSettings.size} ${this.computedSettings.size}`;
+
+    const styles = GenerateStyles(this.computedSettings);
+
+    this.svgStyle = styles.svgStyle;
+    this.circleStyle = styles.circleStyle;
+    this.pathStyle = styles.pathStyle;
+    this.textWrapperStyle = styles.textWrapperStyle;
+    this.labelTextStyle = styles.labelTextStyle;
+    this.percentageTextStyle = styles.percentageTextStyle;
+  }
+
+  displayValue(value: number): void {
     this.dAttr = CalculatePathShape(
-      this.computedSettings.value,
+      value,
       this.computedSettings.size,
       this.computedSettings.thickness
     );
-    this.display = Format(this.computedSettings, this.computedSettings.value);
+    this.display = Format(this.computedSettings, value);
+  }
+
+  animate(): void {
+    console.log(this.computedSettings.animationDuration);
+    for (let index = 0; index < this.computedSettings.value + 1; index++) {
+      setTimeout(() => {
+        this.displayValue(index);
+      }, index * StepDuration(this.computedSettings.value, this.computedSettings.animationDuration));
+    }
   }
 
   ngOnInit() {
     this.configure();
-    this.configureStyles();
-    console.log(this.computedSettings, this.styles);
+
+    if (this.computedSettings.animationDuration || this.computedSettings.animationDuration > 0) {
+      this.animate();
+    } else {
+      this.displayValue(this.computedSettings.value);
+    }
   }
 }

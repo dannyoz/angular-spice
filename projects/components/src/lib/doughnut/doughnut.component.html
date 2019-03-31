@@ -9,7 +9,7 @@
     <path [attr.d]="dAttr" [ngStyle]="pathStyle"></path>
   </svg>
 
-  <div [ngStyle]="textWrapperStyle">
+  <div [ngStyle]="textWrapperStyle" class="text-wrapper">
     <p
       *ngIf="computedSettings.labelText && computedSettings.labelPosition === 'top'"
       [ngStyle]="labelTextStyle"
