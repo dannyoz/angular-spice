@@ -1,0 +1,29 @@
+<div class="spice-doughnut" [ngStyle]="svgStyle">
+  <svg [attr.viewBox]="viewboxAttr">
+    <circle
+      cx="50%"
+      cy="50%"
+      [attr.r]="computedSettings.size / 2 - computedSettings.thickness"
+      [ngStyle]="circleStyle"
+    ></circle>
+    <path [attr.d]="dAttr" [ngStyle]="pathStyle"></path>
+  </svg>
+
+  <div [ngStyle]="textWrapperStyle" class="text-wrapper">
+    <p
+      *ngIf="computedSettings.labelText && computedSettings.labelPosition === 'top'"
+      [ngStyle]="labelTextStyle"
+      data-test="label-top"
+    >
+      {{ computedSettings.labelText }}
+    </p>
+    <p [ngStyle]="percentageTextStyle" data-test="display">{{ display }}</p>
+    <p
+      *ngIf="computedSettings.labelText && computedSettings.labelPosition === 'bottom'"
+      [ngStyle]="labelTextStyle"
+      data-test="label-bottom"
+    >
+      {{ computedSettings.labelText }}
+    </p>
+  </div>
+</div>
