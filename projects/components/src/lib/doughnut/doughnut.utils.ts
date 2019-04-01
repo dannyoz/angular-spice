@@ -1,6 +1,6 @@
-import { DefaultStyles, DoughnutSettings, PathStyle } from './doughnut.interface';
+import { DefaultStyles, DoughnutSettings, PathStyle, Styles } from './doughnut.interface';
 
-export const CalculatePathShape = (percentage, size, thickness): string => {
+export const CalculatePathShape = (percentage: number, size: number, thickness: number): string => {
   const PI = Math.PI;
   const cos = Math.cos;
   const sin = Math.sin;
@@ -24,34 +24,35 @@ export const CalculatePathShape = (percentage, size, thickness): string => {
   return String(attrString);
 };
 
-export const Format = (settings, val): string => {
+export const Format = (settings: DoughnutSettings, val: number): string => {
   const format = settings.format;
+  const value = settings.percentageDecimals ? val.toFixed(settings.percentageDecimals) : val;
   let display;
   switch (format) {
     case 'percentage':
-      display = `${val}%`;
+      display = `${value}%`;
       break;
     case 'fraction':
       display = `${settings.value} / ${settings.ceiling}`;
       break;
     default:
-      display = `${val}%`;
+      display = `${value}%`;
   }
 
   return display;
 };
 
-export const CalculatePercentage = (settings): number => {
+export const CalculatePercentage = (settings: DoughnutSettings): number => {
   const value = settings.value || 0;
   const ceiling = settings.ceiling || 100;
   return (value / ceiling) * 100;
 };
 
-export const StepDuration = (percentage, duration): number => {
+export const StepDuration = (percentage: number, duration: number): number => {
   return duration / percentage;
 };
 
-export const GenerateStyles = (settings: DoughnutSettings) => {
+export const GenerateStyles = (settings: DoughnutSettings): Styles => {
   const sharedStyles: PathStyle = {
     fill: 'none',
     strokeWidth: `${settings.thickness}px` || DefaultStyles.sharedStyles.strokeWidth

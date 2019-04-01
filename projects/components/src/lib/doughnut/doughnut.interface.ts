@@ -3,6 +3,11 @@ export enum DoughnutFormat {
   Fraction = 'fraction'
 }
 
+export enum Position {
+  Top = 'top',
+  Bottom = 'bottom'
+}
+
 export interface DoughnutSettings {
   value: number;
   size?: number;
@@ -15,12 +20,13 @@ export interface DoughnutSettings {
   labelFontSize?: number;
   labelFontWeight?: string;
   labelFontFamily?: string;
-  labelPosition?: string;
+  labelPosition?: Position;
   percentageFontSize?: number;
   percentageFontWeight?: string;
   percentageFontFamily?: string;
   ceiling?: number;
   format?: DoughnutFormat;
+  percentageDecimals?: number;
 }
 
 export interface FontStyles {
@@ -46,6 +52,8 @@ export interface TextWrapperStyle {
 
 export interface StrokeStyle {
   stroke?: string;
+  fill?: string;
+  strokeWidth?: string;
 }
 
 export interface PathStyle {
@@ -73,7 +81,9 @@ export const DefaultSettings: DoughnutSettings = {
   percentageFontWeight: 'bold',
   ceiling: 100,
   format: DoughnutFormat.Percentage,
-  labelPosition: 'bottom'
+  labelPosition: Position.Bottom,
+  labelFontSize: 14,
+  percentageDecimals: 0
 };
 
 export const DefaultStyles: Styles = {
@@ -86,10 +96,14 @@ export const DefaultStyles: Styles = {
     strokeWidth: '5px'
   },
   circleStyle: {
-    stroke: '#DDDDDD'
+    stroke: '#DDDDDD',
+    fill: 'none',
+    strokeWidth: '5px'
   },
   pathStyle: {
-    stroke: '#e7534f'
+    stroke: '#e7534f',
+    fill: 'none',
+    strokeWidth: '5px'
   },
   textWrapperStyle: {
     position: 'absolute',
