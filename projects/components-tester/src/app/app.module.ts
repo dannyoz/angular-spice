@@ -2,11 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { DoughnutModule } from '../../../components/src/public-api';
+import { DoughnutModule, ButtonModule } from '../../../components/src/public-api';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, DoughnutModule],
+  imports: [BrowserModule, DoughnutModule, ButtonModule],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,23 @@
+@import '../../../../../node_modules/spice-sass/src/spice';
+
+button {
+  display: inline-block;
+  outline: none;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  color: contrast(red, 65%);
+  position: relative;
+  background-color: red;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 4px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom-color: darken(red, 10%);
+  font-weight: 600;
+  line-height: inherit;
+  font-family: inherit;
+  @include fontSize(16);
+}

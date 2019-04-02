@@ -3,3 +3,4 @@
  */
 
 export * from './lib/doughnut';
+export * from './lib/button';
