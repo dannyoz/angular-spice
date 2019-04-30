@@ -1,1 +1,3 @@
-<button (click)="submit($event)" (keydown)="submit($event)"><ng-content></ng-content></button>
+<button (click)="submit.emit($event)">
+    <ng-content></ng-content>
+</button>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ButtonSettings } from './button.interface';
 
 @Component({
@@ -10,9 +10,12 @@ export class ButtonComponent implements OnInit {
   @Input()
   settings: ButtonSettings;
 
-  submit(event) {
-    console.log(event);
-  }
+  @Output()
+  submit = new EventEmitter();
+
+  // submit(event) {
+  //   console.log(event);
+  // }
 
   ngOnInit() {
     console.log(this.settings);
